@@ -1,0 +1,43 @@
+name: Validate JDA
+on:
+  push:
+  pull_request:
+jobs:
+  application:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: jda_test
+          POSTGRES_USER: jda
+          POSTGRES_PASSWORD: ci_only_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U jda -d jda_test"
+          --health-interval 3s --health-timeout 3s --health-retries 20
+    env:
+      DATABASE_URL: postgresql://jda:ci_only_password@localhost:5432/jda_test
+      TEST_DATABASE_URL: postgresql://jda:ci_only_password@localhost:5432/jda_test
+      APP_MODE: demo
+      DEMO_LOGIN_ENABLED: "true"
+      NEXTAUTH_URL: http://localhost:3000
+      ALLOW_EXTERNAL_WRITES: "false"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci
+      - run: node scripts/init-env.mjs
+      - run: npm run db:generate
+      - run: npm run db:migrate
+      - run: npm run db:seed
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run test:db
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e

@@ -1,0 +1,52 @@
+{
+  "name": "jda-gestao-integrada",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0",
+    "build": "next build",
+    "start": "next start --hostname 0.0.0.0",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "db:generate": "tsx scripts/generate.ts",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "db:seed": "tsx prisma/seed.ts",
+    "sync": "tsx scripts/sync.ts",
+    "test:db": "tsx scripts/test-db.ts",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "6.19.3",
+    "@prisma/client": "6.19.3",
+    "exceljs": "^4.4.0",
+    "html-to-text": "^10.0.1",
+    "lucide-react": "^0.577.0",
+    "next": "16.4.0",
+    "next-auth": "4.24.15",
+    "pg": "^8.23.1",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "server-only": "^0.0.1",
+    "zod": "4.3.6"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@prisma/internals": "6.19.3",
+    "@types/html-to-text": "^9.0.4",
+    "@types/node": "^24.10.0",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "dotenv": "^17.3.1",
+    "prettier": "^3.9.10",
+    "prisma": "6.19.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "overrides": {
+    "deepmerge-ts": "8.0.0",
+    "exceljs": {
+      "uuid": "11.1.1"
+    }
+  }
+}
