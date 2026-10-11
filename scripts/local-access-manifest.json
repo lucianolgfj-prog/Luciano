@@ -1,0 +1,6 @@
+{
+  "lib/auth.ts": "def5ff18d19284dc1a896d0f117dd47d515f4957503c6226b35b245272a4d61e",
+  "lib/local-demo.ts": "8707b11f5cb573075b4430ea4ea774bebbb14670f4dbb43fca38dd30823e7143",
+  "components/shell.tsx": "a0a9f6e279e3fb0d3cb0b53e12fb6412e54977594ea22637d5a45430a2ee0c78",
+  "scripts/start-local-demo.cmd": "d73a6303998e37b4ec57e25ee7b79594b01b386939498e7abdcc2476e750e58e"
+}

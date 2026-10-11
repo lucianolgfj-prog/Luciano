@@ -72,7 +72,11 @@ export async function Shell({ children }: { children: ReactNode }) {
             <ShieldCheck size={17} />
             <span>
               Ambiente {user.isDemo ? "de demonstração" : "restrito"}
-              <small>Controle de acesso ativo</small>
+              <small>
+                {user.localAccess
+                  ? "Entrada local direta como Luciano"
+                  : "Controle de acesso ativo"}
+              </small>
             </span>
           </div>
           <div className="profile">
@@ -81,7 +85,7 @@ export async function Shell({ children }: { children: ReactNode }) {
               <strong>{user.name}</strong>
               <small>{labels[user.role]}</small>
             </div>
-            <Logout />
+            {!user.localAccess && <Logout />}
           </div>
         </div>
       </aside>
@@ -106,7 +110,7 @@ export async function Shell({ children }: { children: ReactNode }) {
               </Link>
             )}
             <span className="mobile-logout">
-              <Logout />
+              {!user.localAccess && <Logout />}
             </span>
             <span className="avatar small-avatar">{user.name[0]}</span>
           </div>
